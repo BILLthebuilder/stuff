@@ -36,8 +36,7 @@ class App extends Component {
   }
 
   addTodo = (title) => {
-    const newTodo = {
-      id: uuid(),
+    axios.post('https://jsonplaceholder.typicode.com/todos', {
       title,
       completed:false
     })
