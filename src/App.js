@@ -40,8 +40,11 @@ class App extends Component {
       id: uuid(),
       title,
       completed:false
-    }
-    this.setState({todos:[...this.state.todos, newTodo]});
+    })
+      .then(
+        res => this.setState({todos:[...this.state.todos, res.data]})
+      )
+    
   }
 
   render() {
