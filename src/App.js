@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import uuid from 'uuid/v4';
 import axios from 'axios';
 import './App.css';
 import Todos from './components/Todos';
@@ -32,7 +31,11 @@ class App extends Component {
   }
 
   deleteTodo = (id) => {
-    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
+    axios.delete(`https://jsonplaceholder.typicode.com/todos${id}`)
+      .then( res =>
+        this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] })
+         )
+    
   }
 
   addTodo = (title) => {
