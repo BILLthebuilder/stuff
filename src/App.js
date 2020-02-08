@@ -10,7 +10,7 @@ import NotFound from './components/Error';
 
 class App extends Component {
   state = {
-    todos: [ ]
+    todos: []
   }
 
   componentDidMount() {
@@ -31,22 +31,22 @@ class App extends Component {
   }
 
   deleteTodo = (id) => {
-    axios.delete(`https://jsonplaceholder.typicode.com/todos${id}`)
-      .then( res =>
+    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res =>
         this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] })
-         )
-    
+      )
+
   }
 
   addTodo = (title) => {
     axios.post('https://jsonplaceholder.typicode.com/todos', {
       title,
-      completed:false
+      completed: false
     })
       .then(
-        res => this.setState({todos:[...this.state.todos, res.data]})
+        res => this.setState({ todos: [...this.state.todos, res.data] })
       )
-    
+
   }
 
   render() {
@@ -55,17 +55,17 @@ class App extends Component {
         <div className="App">
           <Header />
           <Switch>
-             <Route exact path="/" render={props => (
-            <React.Fragment>
-             <AddTodo addTodo={this.addTodo}/>
-             <Todos todos={this.state.todos} markComplete={this.markComplete} deleteTodo={this.deleteTodo} />
-            </React.Fragment>
-          )}/>
-          <Route exact path="/about" component={About} />
-          <Route component={NotFound} />
+            <Route exact path="/" render={props => (
+              <React.Fragment>
+                <AddTodo addTodo={this.addTodo} />
+                <Todos todos={this.state.todos} markComplete={this.markComplete} deleteTodo={this.deleteTodo} />
+              </React.Fragment>
+            )} />
+            <Route exact path="/about" component={About} />
+            <Route component={NotFound} />
           </Switch>
         </div>
-      </Router> 
+      </Router>
     );
   }
 
